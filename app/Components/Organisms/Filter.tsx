@@ -7,31 +7,28 @@ interface FiltersProps {
 }
 
 const Filters: React.FC<FiltersProps> = ({ onFilterChange, genres, platforms }) => {
-  const [selectedGenre, setSelectedGenre] = useState<string>('');
-  const [selectedPlatform, setSelectedPlatform] = useState<string>('');
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedPlatform, setSelectedPlatform] = useState('');
 
-  // Función que maneja el cambio de los filtros
-  const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGenre(event.target.value);
-    onFilterChange({
-      genre: event.target.value,
-      platform: selectedPlatform,
-    });
+  // Maneja el cambio del género
+  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const genre = e.target.value;
+    setSelectedGenre(genre);
+    onFilterChange({ genre, platform: selectedPlatform });
   };
 
-  const handlePlatformChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedPlatform(event.target.value);
-    onFilterChange({
-      genre: selectedGenre,
-      platform: event.target.value,
-    });
+  // Maneja el cambio de la plataforma
+  const handlePlatformChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const platform = e.target.value;
+    setSelectedPlatform(platform);
+    onFilterChange({ genre: selectedGenre, platform });
   };
 
   return (
     <div>
       <h3>Filters</h3>
 
-      {/* Filtro de género */}
+      {/* Filtro por género */}
       <div>
         <label htmlFor="genre">Genre: </label>
         <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
@@ -44,7 +41,7 @@ const Filters: React.FC<FiltersProps> = ({ onFilterChange, genres, platforms }) 
         </select>
       </div>
 
-      {/* Filtro de plataforma */}
+      {/* Filtro por plataforma */}
       <div>
         <label htmlFor="platform">Platform: </label>
         <select id="platform" value={selectedPlatform} onChange={handlePlatformChange}>

@@ -7,9 +7,9 @@ import Button from '../atoms/Button';
 interface GameCardProps {
   game: Game;
   onClick: () => void;
-}
 
-const GameCard: React.FC<GameCardProps> = ({ game, onClick }) => {
+}
+function GameCard({ game, onClick }:GameCardProps) {
   return (
     <Card>
       <img src={game.background_image} alt={game.name} style={{ width: '100%', borderRadius: '4px' }} />

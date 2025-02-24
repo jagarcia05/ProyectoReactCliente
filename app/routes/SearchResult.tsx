@@ -2,34 +2,30 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchGames } from 'app/Service/api';
 import GameList from '../Components/Organisms/GameList';
-import type { Game, ApiResponse } from 'app/types/game'; // Correcto si verbatimModuleSyntax está habilitado
+import type { Game } from 'app/types/game';
 
 const SearchResults: React.FC = () => {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search).get('query') || '';
+  const { search } = useLocation();
+  const query = new URLSearchParams(search).get('query') || '';  // Extracción directa del query
   const [games, setGames] = useState<Game[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Llamada para obtener los juegos según el query
   useEffect(() => {
     const loadSearchResults = async () => {
       try {
-        const data = await fetchGames(1, query);
-        setGames(data.results);
+        const { results } = await fetchGames(1, query);  // Desestructuración directa
+        setGames(results);
       } catch (err) {
-        // Comprobamos si 'err' es una instancia de Error
-        if (err instanceof Error) {
-          setError(err.message); // Accedemos a 'message' solo si es un Error
-        } else {
-          setError('An unknown error occurred'); // Manejo de errores desconocidos
-        }
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
         setLoading(false);
       }
     };
 
-    loadSearchResults();
-  }, [query]);
+    if (query) loadSearchResults();  // Asegurarse de que haya un query antes de hacer la solicitud
+  }, [query]);  // Re-cargar resultados solo cuando el query cambia
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

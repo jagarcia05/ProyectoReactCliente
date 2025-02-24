@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Game, ApiResponse } from 'app/types/game';
+import type { Game } from 'app/types/game';
 import GameCard from '../molecules/GameCard';
 
 interface GameListProps {
@@ -7,7 +7,7 @@ interface GameListProps {
   onGameClick: (id: number) => void;
 }
 
-const GameList: React.FC<GameListProps> = ({ games, onGameClick }) => {
+function GameList({ games, onGameClick }: GameListProps) {
   return (
     <div className="flex flex-wrap justify-center gap-8 p-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -21,6 +21,6 @@ const GameList: React.FC<GameListProps> = ({ games, onGameClick }) => {
       </div>
     </div>
   );
-}  
+}
 
 export default GameList;
