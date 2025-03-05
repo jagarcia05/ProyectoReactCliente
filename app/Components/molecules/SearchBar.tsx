@@ -11,7 +11,13 @@ function SearchBar ({ onSearch }: SearchBarProps)  {
 
   const handleSearch = () => {
     if (query.trim() !== '') {
-      onSearch(query); // Llama a la función para iniciar la búsqueda
+      onSearch(query); 
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
@@ -20,6 +26,7 @@ function SearchBar ({ onSearch }: SearchBarProps)  {
       <Input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}  // Agregar este evento
         placeholder="Search games..."
       />
       <Button onClick={handleSearch}>Search</Button>

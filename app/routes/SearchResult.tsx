@@ -15,8 +15,8 @@ const SearchResults: React.FC = () => {
   useEffect(() => {
     const loadSearchResults = async () => {
       try {
-        const { results } = await fetchGames(1, query);  // Desestructuración directa
-        setGames(results);
+        const { games } = await fetchGames(1, 10, query); // Aquí accede a "games"  // Desestructuración directa
+        setGames(games);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
