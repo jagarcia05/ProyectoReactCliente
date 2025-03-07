@@ -1,20 +1,21 @@
-import { useNavigate } from 'react-router-dom';
 import ButtonHeader from '../atoms/ButtonHeader';
 
 const NavigationMenu: React.FC = () => {
-  const navigate = useNavigate();
+  const handleNavigation = (path: string) => {
+    window.location.href = path;
+  };
 
   return (
     <div className="hidden md:flex w-full md:w-1/3 justify-center ps-8" id="navbarNav">
       <ul className="flex w-full justify-between text-center">
         <li>
-          <ButtonHeader text="Juegos" onClick={() => navigate(`/`)} />
+          <ButtonHeader text="Juegos" onClick={() => handleNavigation(`/`)} />
         </li>
         <li>
-          <ButtonHeader text="Plataformas" onClick={() => navigate(`/platforms`)} />
+          <ButtonHeader text="Plataformas" onClick={() => handleNavigation(`/platforms`)} />
         </li>
         <li>
-          <ButtonHeader text="Géneros" onClick={() => navigate(`/genres`)} />
+          <ButtonHeader text="Géneros" onClick={() => handleNavigation(`/genres`)} />
         </li>
       </ul>
     </div>

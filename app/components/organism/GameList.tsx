@@ -13,8 +13,6 @@ function GameList({ searchTerm = "" }: GameListProps) {
   const [games, setGames] = useState<Game[]>([]);
   const [filters, setFilters] = useState<{ platform?: string; genre?: string }>({});
   const [page, setPage] = useState<number>(1);
-  const [nextPage, setNextPage] = useState<number | null>(null);
-  const [prevPage, setPrevPage] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,10 +21,9 @@ function GameList({ searchTerm = "" }: GameListProps) {
       setLoading(true);
       setError(null);
       try {
-        const { games, nextPage, prevPage } = await fetchGames(page, 12, searchTerm);
+        const { games } = await fetchGames(1, 100, searchTerm);
         setGames(games);
-        setNextPage(nextPage);
-        setPrevPage(prevPage);
+        setPage(1); 
       } catch {
         setError("Error al cargar los juegos");
       } finally {
@@ -35,7 +32,11 @@ function GameList({ searchTerm = "" }: GameListProps) {
     };
 
     loadGames();
-  }, [page, searchTerm]);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
 
   const filteredGames = games.filter((game) => {
     const matchesPlatform =
@@ -46,30 +47,34 @@ function GameList({ searchTerm = "" }: GameListProps) {
     return matchesPlatform && matchesGenre;
   });
 
+  const pageSize = 12;
+  const totalPages = Math.ceil(filteredGames.length / pageSize);
+  const paginatedGames = filteredGames.slice((page - 1) * pageSize, page * pageSize);
+
   if (loading) return <div className="text-white">Cargando...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
   return (
     <div className="flex flex-col py-4 px-15">
-
       <Filters setFilters={setFilters} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredGames.length > 0 ? (
-          filteredGames.map((game) => <GameCard key={game.id} game={game} />)
+        {paginatedGames.length > 0 ? (
+          paginatedGames.map((game) => <GameCard key={game.id} game={game} />)
         ) : null}
       </div>
 
-      {filteredGames.length === 0 && (
+      {paginatedGames.length === 0 && (
         <p className="text-white text-center mt-4">No hay juegos disponibles.</p>
       )}
 
       <div className="w-full flex justify-center mt-4">
-        <Pagination page={page} nextPage={nextPage} prevPage={prevPage} setPage={setPage} />
+        {totalPages > 1 && (
+          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+        )}
       </div>
     </div>
   );
-
 }
 
 export default GameList;

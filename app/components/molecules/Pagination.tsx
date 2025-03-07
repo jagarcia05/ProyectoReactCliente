@@ -1,24 +1,25 @@
 interface PaginationProps {
     page: number;
-    nextPage: number | null;
-    prevPage: number | null;
+    totalPages: number;
     setPage: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ page, nextPage, prevPage, setPage }) => {
+const Pagination: React.FC<PaginationProps> = ({ page, totalPages, setPage }) => {
     return (
-        <div className="flex justify-center space-x-4 mt-4">
+        <div className="flex justify-center space-x-4 mt-4 items-center">
             <button
-                onClick={() => prevPage !== null && setPage(prevPage)}
-                disabled={prevPage === null}
+                onClick={() => setPage(page - 1)}
+                disabled={page === 1}
                 className="px-4 py-2 bg-gray-900 rounded disabled:opacity-50"
             >
                 &larr;
             </button>
-            <span className="px-4 py-2 bg-gray-900 rounded">Página {page}</span>
+            <span className="px-4 py-2 bg-gray-900 rounded">
+                Página {page} de {totalPages}
+            </span>
             <button
-                onClick={() => nextPage !== null && setPage(nextPage)}
-                disabled={nextPage === null}
+                onClick={() => setPage(page + 1)}
+                disabled={page === totalPages}
                 className="px-4 py-2 bg-gray-900 rounded disabled:opacity-50"
             >
                 &rarr;
