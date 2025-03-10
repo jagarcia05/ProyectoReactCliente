@@ -29,7 +29,7 @@ function GameDetails() {
   return (
     <main className="bg-black min-h-screen p-5">
       <section className="max-w-4xl mx-auto text-white">
-        <Link to="/" className="btn border border-white text-white py-2 px-4 inline-block mb-4">← Back</Link>
+        <Link to="/" className="btn border border-white text-white py-2 px-4 inline-block mb-4">&larr; Back</Link>
         <div className="bg-gray-700 p-5 rounded-lg">
           <img src={game.background_image} alt={game.name} className="w-full h-auto object-cover rounded-lg" />
           <h2 className="text-3xl font-bold mt-4">{game.name}</h2>
