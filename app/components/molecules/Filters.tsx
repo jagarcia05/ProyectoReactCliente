@@ -54,7 +54,7 @@ const Filters: React.FC<FiltersProps> = ({ setFilters }) => {
           className="flex items-center justify-between w-full px-4 py-2 text-white bg-gray-700 rounded-lg shadow hover:bg-gray-600"
           onClick={() => setIsPlatformOpen(!isPlatformOpen)}
         >
-          {selectedPlatform} <span className="ml-2">▼</span>
+          {selectedPlatform} <span className="ml-2">&#9660;</span>
         </button>
         {isPlatformOpen && (
           <ul className="absolute left-0 mt-2 w-full bg-gray-800 text-white shadow-lg rounded-lg z-10 max-h-100 overflow-y-auto">
@@ -77,7 +77,7 @@ const Filters: React.FC<FiltersProps> = ({ setFilters }) => {
           className="flex items-center justify-between w-full px-4 py-2 text-white bg-gray-700 rounded-lg shadow hover:bg-gray-600"
           onClick={() => setIsGenreOpen(!isGenreOpen)}
         >
-          {selectedGenre} <span className="ml-2">▼</span>
+          {selectedGenre} <span className="ml-2">&#9660;</span>
         </button>
         {isGenreOpen && (
           <ul className="absolute left-0 mt-2 w-full bg-gray-800 text-white shadow-lg rounded-lg z-10 max-h-100 overflow-y-auto">
