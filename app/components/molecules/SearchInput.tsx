@@ -18,7 +18,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ searchTerm, setSearchTerm }) 
           className="absolute right-7 top-1/2 transform -translate-y-1/2 text-white"
           onClick={() => setSearchTerm("")}
         >
-          ✖
+          &#10060;
         </button>
       )}
     </div>
