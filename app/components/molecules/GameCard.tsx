@@ -1,4 +1,4 @@
-import { FaWindows, FaPlaystation, FaXbox, FaApple, FaLinux, FaAndroid } from 'react-icons/fa';
+import { FaWindows, FaPlaystation, FaXbox, FaApple, FaLinux, FaAndroid, FaGlobe } from 'react-icons/fa';
 import { SiNintendo, SiMacos } from 'react-icons/si';
 import { GiRetroController } from 'react-icons/gi';
 import type { Game } from 'app/types/game';
@@ -10,10 +10,12 @@ const platformIcons: Record<string, JSX.Element> = {
   playstation: <FaPlaystation />,
   xbox: <FaXbox />,
   "nintendo switch": <SiNintendo />,
+  "wii u": <SiNintendo />,
   ios: <FaApple />,
   android: <FaAndroid />,
   macos: <SiMacos />,
   linux: <FaLinux />,
+  web: <FaGlobe />,
   "classic macintosh": <SiMacos />,
   "apple ii": <FaApple />,
   "commodore / amiga": <GiRetroController />,
@@ -30,9 +32,10 @@ const platformIcons: Record<string, JSX.Element> = {
 const getPlatformIconKey = (platformName: string) => {
   if (!platformName) return '';
   const name = platformName.toLowerCase();
-  if (name.includes("playstation")) return "playstation";
+  if (name.includes("playstation") || name.includes("ps vita")) return "playstation";
   if (name.includes("xbox")) return "xbox";
-  if (name.includes("nintendo")) return "nintendo switch";
+  if (name.includes("nintendo") || name.includes("wii u")) return "nintendo switch";
+  if (name.includes("web")) return "web";
   return name;
 };
 

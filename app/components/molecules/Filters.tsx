@@ -30,7 +30,7 @@ const Filters: React.FC<FiltersProps> = ({ setFilters }) => {
 
   const handlePlatformSelect = (platform: string) => {
     setSelectedPlatform(platform);
-    setFilters({ platform: platform === "Todas" ? undefined : platform, genre: selectedGenre === "Todas" ? undefined : selectedGenre });
+    setFilters({ platform: platform === "Todos" ? undefined : platform, genre: selectedGenre === "Todos" ? undefined : selectedGenre });
     setIsPlatformOpen(false);
   };
 
@@ -48,7 +48,6 @@ const Filters: React.FC<FiltersProps> = ({ setFilters }) => {
 
   return (
     <div className="flex flex-col sm:flex-row gap-4 pb-5">
-
       <div className="relative w-48">
         <label className="block text-sm font-medium text-gray-300 mb-1">Plataforma</label>
         <button
@@ -58,7 +57,7 @@ const Filters: React.FC<FiltersProps> = ({ setFilters }) => {
           {selectedPlatform} <span className="ml-2">▼</span>
         </button>
         {isPlatformOpen && (
-          <ul className="absolute left-0 mt-2 w-full bg-gray-800 text-white shadow-lg rounded-lg z-10">
+          <ul className="absolute left-0 mt-2 w-full bg-gray-800 text-white shadow-lg rounded-lg z-10 max-h-100 overflow-y-auto">
             {platforms.map((platform) => (
               <li
                 key={platform}
@@ -81,7 +80,7 @@ const Filters: React.FC<FiltersProps> = ({ setFilters }) => {
           {selectedGenre} <span className="ml-2">▼</span>
         </button>
         {isGenreOpen && (
-          <ul className="absolute left-0 mt-2 w-full bg-gray-800 text-white shadow-lg rounded-lg z-10">
+          <ul className="absolute left-0 mt-2 w-full bg-gray-800 text-white shadow-lg rounded-lg z-10 max-h-100 overflow-y-auto">
             {genres.map((genre) => (
               <li
                 key={genre}
