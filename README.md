@@ -50,4 +50,4 @@ npm run build
 
 ## 5. Enlaces de interés.
 
-- [Enlace a la página desplegada con Vercel](https://pokedexsinnoh.vercel.app/)
+- [Enlace a la página desplegada con Vercel](https://proyecto-react-rawg.vercel.app/)
